@@ -1,0 +1,39 @@
+// Use the contact database; if it doesn't exist, it will be created
+use contact
+
+// Create a collection called 'contactlist'
+db.createCollection("contactlist")
+
+// Insert multiple documents into 'contactlist'
+db.contactlist.insertMany([
+  { lastName: "Ben", firstName: "Moris", email: "ben@gmail.com", age: 26 },
+  { lastName: "Kefi", firstName: "Seif", email: "kefi@gmail.com", age: 15 },
+  { lastName: "Emilie", firstName: "brouge", email: "emilie.b@gmail.com", age: 40 },
+  { lastName: "Alex", firstName: "brown", age: 4 },
+  { lastName: "Denzel", firstName: "Washington", age: 3 }
+])
+
+// Display all of the contacts list
+db.contactlist.find()
+
+// Display all information about one person using their ObjectId
+// Replace 'Your_ObjectId' with the actual ObjectId of the document you want to view
+db.contactlist.findOne({ _id: ObjectId("Your_ObjectId") })
+
+// Display all contacts with an age greater than 18
+db.contactlist.find({ age: { $gt: 18 } })
+
+// Display all contacts with an age greater than 18 and name containing "ah"
+db.contactlist.find({ age: { $gt: 18 }, firstName: /ah/ })
+
+// Change the contact's first name from "Kefi Seif" to "Kefi Anis"
+db.contactlist.updateOne(
+  { lastName: "Kefi", firstName: "Seif" },
+  { $set: { firstName: "Anis" } }
+)
+
+// Delete contacts that are aged under 5
+db.contactlist.deleteMany({ age: { $lt: 5 } })
+
+// Display all of the contacts list again after deletions
+db.contactlist.find()
