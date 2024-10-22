@@ -1,6 +1,7 @@
 
 # MongoDB Checkpoint Solution
 
+
 ### Create a database called "contact"
 ```js
 use contact
